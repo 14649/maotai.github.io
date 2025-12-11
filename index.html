@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品溯源 - 贵州茅台酒 53°飞天茅台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .product-spec {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        .traceability-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .info-value {
+            color: #2c3e50;
+            text-align: right;
+        }
+        
+        .verification-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status-genuine {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .product-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .feature-item {
+            background: #e3f2fd;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .feature-text {
+            font-size: 12px;
+            color: #1976d2;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3498db;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 5px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3498db;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #3498db;
+        }
+        
+        .timeline-date {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+        
+        .timeline-content {
+            font-size: 14px;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: 1px solid #bdc3c7;
+        }
+        
+        .btn-secondary:hover {
+            background: #d5dbdb;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .scan-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="product-badge">正品保证</div>
+            <div class="product-image">
+                
+            </div>
+            <div class="product-name">贵州茅台酒</div>
+            <div class="product-spec">53°飞天茅台 500ml</div>
+        </div>
+        
+        <div class="content">
+            <!-- 溯源信息 -->
+            <div class="section">
+                <div class="section-title">
+                    <i>🔍</i> 产品溯源信息
+                </div>
+                <div class="traceability-info">
+                    <div class="info-item">
+                        <span class="info-label">产品批次:</span>
+                        <span class="info-value">2023-08-MT001</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">生产日期:</span>
+                        <span class="info-value">2023年8月15日</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">溯源状态:</span>
+                        <span class="info-value verification-status status-genuine">正品验证通过</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">查询次数:</span>
+                        <span class="info-value">第1次查询</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">查询时间:</span>
+                        <span class="info-value" id="queryTime">2024年1月15日 14:30</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品特性 -->
+            <div class="section">
+                <div class="section-title">
+                    <i>⭐</i> 产品特性
+                </div>
+                <div class="product-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🥇</div>
+                        <div class="feature-text">国家名酒</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⏳</div>
+                        <div class="feature-text">五年陈酿</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌾</div>
+                        <div class="feature-text">优质高粱</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔬</div>
+                        <div class="feature-text">质量认证</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 溯源时间线 -->
+            <div class="section">
+                <div class="section-title">
+                    <i>📅</i> 溯源轨迹
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023-08-15</div>
+                        <div class="timeline-content">贵州茅台酒厂 - 生产灌装</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023-09-01</div>
+                        <div class="timeline-content">质量检测合格 - 入库存储</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023-10-15</div>
+                        <div class="timeline-content">出厂检验 - 发往经销商</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023-11-01</div>
+                        <div class="timeline-content">到达指定销售点 - 上架销售</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品介绍 -->
+            <div class="section">
+                <div class="section-title">
+                    <i>📖</i> 产品介绍
+                </div>
+                <div style="font-size: 14px; line-height: 1.6; color: #555;">
+                    <p>贵州茅台酒是中国传统特产酒，与苏格兰威士忌、法国科涅克白兰地齐名的世界三大蒸馏名酒之一。</p>
+                    <p style="margin-top: 10px;">采用优质高粱为原料，小麦制曲，秉承传统工艺，历经五年以上陈酿，具有酱香突出、幽雅细腻、酒体醇厚、回味悠长等特点。</p>
+                </div>
+            </div>
+            
+            <!-- 操作按钮 -->
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="verifyAgain()">
+                    <i>🔄</i> 再次验证
+                </button>
+                <button class="btn btn-secondary" onclick="shareProduct()">
+                    <i>📤</i> 分享信息
+                </button>
+                <button class="btn btn-primary" onclick="showDetails()" style="grid-column: 1 / -1;">
+                    <i>📋</i> 查看详细报告
+                </button>
+                <button class="btn btn-secondary" onclick="contactService()" style="grid-column: 1 / -1;">
+                    <i>📞</i> 联系客服
+                </button>
+            </div>
+            
+            <div class="scan-info">
+                <strong>溯源说明:</strong> 本信息通过区块链技术记录，确保数据不可篡改。如有疑问请拨打防伪热线：400-800-XXXX
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 贵州茅台酒股份有限公司</p>
+            <p>防伪溯源查询系统 | 查询编号: MT20231215001</p>
+        </div>
+    </div>
+
+    <script>
+        // 设置查询时间
+        document.getElementById('queryTime').textContent = new Date().toLocaleString('zh-CN');
+        
+        // 功能函数
+        function verifyAgain() {
+            alert('正在重新验证产品真伪...\n验证结果：✅ 正品确认');
+            // 实际应用中这里可以调用验证API
+        }
+        
+        function shareProduct() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '贵州茅台酒溯源信息',
+                    text: '我查询了这瓶茅台酒的溯源信息，确认是正品！',
+                    url: window.location.href
+                });
+            } else {
+                alert('分享功能已准备，链接已复制到剪贴板');
+                // 备用分享方案
+            }
+        }
+        
+        function showDetails() {
+            const details = `
+产品详细报告：
+- 酒精度：53%vol
+- 净含量：500ml
+- 原料：高粱、小麦、水
+- 执行标准：GB/T 18356
+- 生产许可证：QS5200 1501 0023
+- 贮存条件：阴凉、干燥、通风
+            `;
+            alert(details);
+        }
+        
+        function contactService() {
+            const phone = '400-800-XXXX';
+            if (confirm(`是否拨打客服电话：${phone}？`)) {
+                window.location.href = `tel:${phone}`;
+            }
+        }
+        
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // 模拟溯源数据加载
+            setTimeout(() => {
+                const status = document.querySelector('.verification-status');
+                status.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    status.style.transform = 'scale(1)';
+                }, 300);
+            }, 800);
+        });
+    </script>
+</body>
+</html>
